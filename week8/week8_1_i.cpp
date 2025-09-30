@@ -1,3 +1,8 @@
+
+/*1# Write a C++ program that uses functions to perform the following operations: 
+ 
+i. To insert a substring into a given main string from a given position.*/
+
 #include <iostream>
 #include <string>
 using namespace std;
