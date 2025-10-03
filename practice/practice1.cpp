@@ -10,7 +10,7 @@ void printArray(int arr[],int size){
 
 int main(){
 	int array[5] = {20,40,80,75,96};
-	printArray(array,4);
+	printArray(array,5-1);
 }
 
 /*   output
