@@ -1,52 +1,23 @@
-/*4# Write a C++ program to swap two numbers by both call by value and call 
-by reference mechanisms, using two functions swap_value() and 
-swap_reference respectively, by getting the choice from the user and executing 
-the user's choice using switch-case. */
+/*  2# Write C programs that use recursive and non-recursive functions to solve 
+towers of Hanoi problem.  */
 
 #include <iostream>
 using namespace std;
 
-void swap_value(int a, int b){
-	a = a+b;
-	b = a-b;
-	a = a-b;
-	
-	cout << "\nAfter swap \n a = " << a << " and "<< "b = " << b; 
+void TOH(int n, char A, char B, char C) {
+    if (n > 0) {
+        TOH(n - 1, A, C, B);
+        cout << "Move a Disc from " << A << " to " << C << endl;
+        TOH(n - 1, B, A, C);
+    }
 }
 
-swap_reference(int *p,int *q){
-	*p = *p + *q;
-	*q = *p - *q;
-	*p = *p - *q;
+int main() {
+    int n;
+    cout << "Enter number of disks: ";
+    cin >> n;
+
+    TOH(n, 'A', 'B', 'C');
+    return 0;
 }
 
-int menue(){
-	int choice;
-	cout << "\n\nSwapping of two numbers " <<endl;
-	cout << "1. Using call by value " <<endl;
-	cout << "2. Using call by refrence " <<endl;
-	cout << "3. For Exit" <<endl;
-	cout << "\n\nEnter your choice ";
-	cin>>choice;
-	return choice;
-}
-
-int main(){
-	int a,b;
-	while(1){
-	cout << "\n############################" <<endl;
-	switch(menue()){
-		case 1:	cout << "enter 2 number " ;
-				cin>>a>>b;
-				swap_value(a,b);
-			break;
-		case 2: cout << "enter 2 number " ;
-				cin>>a>>b; 
-				swap_reference(&a,&b);
-				cout << "\nAfter swap \n a = " << a << " and "<< "b = " << b; 
-			break;
-		case 3: exit(0);
-			default: cout << "Invalid choice ";
-	}
-}
-}
