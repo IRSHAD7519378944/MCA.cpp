@@ -1,0 +1,101 @@
+CREATE TABLE PERSON (
+    driver_id VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100)
+);
+
+CREATE TABLE CAR (
+    regno VARCHAR(20) PRIMARY KEY,
+    model VARCHAR(50),
+    year INT
+);
+
+CREATE TABLE ACCIDENT (
+    report_number INT PRIMARY KEY,
+    accd_date DATE,
+    location VARCHAR(100)
+);
+
+CREATE TABLE OWNS (
+    driver_id VARCHAR(20),
+    regno VARCHAR(20),
+    PRIMARY KEY (driver_id, regno),
+    FOREIGN KEY (driver_id) REFERENCES PERSON(driver_id),
+    FOREIGN KEY (regno) REFERENCES CAR(regno)
+);
+
+CREATE TABLE PARTICIPATED (
+    driver_id VARCHAR(20),
+    regno VARCHAR(20),
+    report_number INT,
+    damage_amount INT,
+    PRIMARY KEY (driver_id, regno, report_number),
+    FOREIGN KEY (driver_id) REFERENCES PERSON(driver_id),
+    FOREIGN KEY (regno) REFERENCES CAR(regno),
+    FOREIGN KEY (report_number) REFERENCES ACCIDENT(report_number)
+);
+-- PERSON
+INSERT INTO PERSON VALUES ('D1', 'Amit Kumar', 'Delhi');
+INSERT INTO PERSON VALUES ('D2', 'Priya Singh', 'Mumbai');
+INSERT INTO PERSON VALUES ('D3', 'Ravi Sharma', 'Lucknow');
+INSERT INTO PERSON VALUES ('D4', 'Sneha Das', 'Kolkata');
+INSERT INTO PERSON VALUES ('D5', 'Arjun Mehta', 'Bangalore');
+
+-- CAR
+INSERT INTO CAR VALUES ('C1', 'Honda City', 2007);
+INSERT INTO CAR VALUES ('C2', 'Hyundai i20', 2008);
+INSERT INTO CAR VALUES ('C3', 'Maruti Swift', 2008);
+INSERT INTO CAR VALUES ('C4', 'Tata Safari', 2009);
+INSERT INTO CAR VALUES ('C5', 'Ford Figo', 2007);
+
+-- ACCIDENT
+INSERT INTO ACCIDENT VALUES (10, '2008-02-12', 'Delhi');
+INSERT INTO ACCIDENT VALUES (11, '2008-06-20', 'Mumbai');
+INSERT INTO ACCIDENT VALUES (12, '2009-01-15', 'Lucknow');
+INSERT INTO ACCIDENT VALUES (13, '2008-09-10', 'Kolkata');
+INSERT INTO ACCIDENT VALUES (14, '2010-03-05', 'Bangalore');
+
+-- OWNS
+INSERT INTO OWNS VALUES ('D1', 'C1');
+INSERT INTO OWNS VALUES ('D2', 'C2');
+INSERT INTO OWNS VALUES ('D3', 'C3');
+INSERT INTO OWNS VALUES ('D4', 'C4');
+INSERT INTO OWNS VALUES ('D5', 'C5');
+
+-- PARTICIPATED
+INSERT INTO PARTICIPATED VALUES ('D1', 'C1', 10, 10000);
+INSERT INTO PARTICIPATED VALUES ('D2', 'C2', 11, 15000);
+INSERT INTO PARTICIPATED VALUES ('D3', 'C3', 12, 20000);
+INSERT INTO PARTICIPATED VALUES ('D4', 'C4', 13, 30000);
+INSERT INTO PARTICIPATED VALUES ('D5', 'C5', 14, 5000);
+
+UPDATE PARTICIPATED
+SET damage_amount = 25000
+WHERE report_number = 12 AND regno = 'C3';
+
+INSERT INTO ACCIDENT VALUES (15, '2011-07-21', 'Pune');
+
+-- Suppose Car C1 (Honda City) was involved in it
+INSERT INTO PARTICIPATED VALUES ('D1', 'C1', 15, 18000);
+
+SELECT COUNT(DISTINCT O.driver_id) AS total_people
+FROM OWNS O
+JOIN PARTICIPATED P ON O.driver_id = P.driver_id AND O.regno = P.regno
+JOIN ACCIDENT A ON P.report_number = A.report_number
+WHERE YEAR(A.accd_date) = 2008;
+
+SELECT COUNT(DISTINCT A.report_number) AS num_accidents
+FROM ACCIDENT A
+JOIN PARTICIPATED P ON A.report_number = P.report_number
+JOIN CAR C ON P.regno = C.regno
+WHERE C.model = 'Maruti Swift';
+
+SELECT *FROM ACCIDENT;
+
+SELECT *FROM PERSON;
+
+SELECT *FROM CAR;
+
+SELECT *FROM OWNS;
+
+SELECT *FROM PARTICIPATED;
