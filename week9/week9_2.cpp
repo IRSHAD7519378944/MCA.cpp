@@ -4,17 +4,20 @@ towers of Hanoi problem.  */
 #include <iostream>
 using namespace std;
 
+int i=1;
+
 void TOH(int n, char A, char B, char C) {
+	
     if (n > 0) {
         TOH(n - 1, A, C, B);
-        cout << "Move a Disc from " << A << " to " << C << endl;
+        cout << "step-"<< i++ << ": Move a Disc from " << A << " to " << C << endl << endl;
         TOH(n - 1, B, A, C);
     }
 }
 
 int main() {
     int n;
-    cout << "Enter number of disks: ";
+    cout << "Enter number of disks: " << endl;
     cin >> n;
 
     TOH(n, 'A', 'B', 'C');
