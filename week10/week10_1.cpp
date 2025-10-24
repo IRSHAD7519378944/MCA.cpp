@@ -1,3 +1,10 @@
+/* 1# Write a C++ program that uses functions to perform the following operations: 
+i. Reading a complex number 
+ii. Writing a complex number 
+iii. Addition and subtraction of two complex numbers 
+iv. Multiplication of two complex numbers. Note: Represent complex 
+numbers using a structure. */
+
 #include <iostream>
 using namespace std;
 

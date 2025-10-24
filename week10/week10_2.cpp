@@ -1,46 +1,37 @@
+/*2#  Write a C++ program to compute the monthly pay of 100 employees using each 
+employee's name, basic pay. The DA is calculated as 52% of the basic pay. 
+Gross-salary (basic pay + DA). Print the employee's name and gross salary. */
+
 #include <iostream>
-#include <iomanip> // for setw and fixed
+#include <string>
 using namespace std;
 
-// Structure to store employee details
-struct Employee {
-    string name;
-    double basicPay;
-    double grossSalary;
-};
-
-// Function to calculate gross salary
-double calculateGross(double basicPay) {
-    double DA = 0.52 * basicPay; // DA = 52% of basic pay
-    return basicPay + DA;
-}
-
 int main() {
-    const int NUM_EMPLOYEES = 100;
-    Employee employees[NUM_EMPLOYEES];
+    const int numEmployees = 3;
+    string name[numEmployees];
+    float basicPay[numEmployees], DA[numEmployees], grossSalary[numEmployees];
 
-    cout << fixed << setprecision(2); // To display salaries with 2 decimal places
+    cout << "Enter employee details (Name and Basic Pay):\n";
 
-    // Input employee details
-    for (int i = 0; i < NUM_EMPLOYEES; i++) {
-        cout << "Enter name of employee " << i + 1 << ": ";
-        cin.ignore(); // To clear the input buffer
-        getline(cin, employees[i].name);
-        cout << "Enter basic pay of " << employees[i].name << ": ";
-        cin >> employees[i].basicPay;
+    for (int i = 0; i < numEmployees; i++) {
+        cout << "\nEmployee " << i + 1 << ":\n";
+        cout << "Name: ";
+        cin >> name[i];
+        cout << "Basic Pay: ";
+        cin >> basicPay[i];
 
-        // Calculate gross salary
-        employees[i].grossSalary = calculateGross(employees[i].basicPay);
+        // Calculate DA (52% of basic pay)
+        DA[i] = 0.52 * basicPay[i];
 
-        cout << endl;
+        // Calculate Gross Salary
+        grossSalary[i] = basicPay[i] + DA[i];
     }
 
-    // Print employee name and gross salary
-    cout << "\nEmployee Name\tGross Salary\n";
-    cout << "-----------------------------\n";
-    for (int i = 0; i < NUM_EMPLOYEES; i++) {
-        cout << setw(15) << left << employees[i].name
-             << setw(10) << right << employees[i].grossSalary << endl;
+    cout << "\n--- Employee Gross Salary Details ---\n";
+    cout << "Name\t\tGross Salary\n";
+
+    for (int i = 0; i < numEmployees; i++) {
+        cout << name[i] << "\t\t" << grossSalary[i] << endl;
     }
 
     return 0;

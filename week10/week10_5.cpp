@@ -1,18 +1,21 @@
+/*5#  Write a C++ program to define a structure named D.O.B., which contains 
+name, day, month and year. Using the concept of nested structures display your 
+name and date of birth.*/
+
 #include <iostream>
 #include <string>
 using namespace std;
 
-// Structure to store date details
 struct Date {
     int day;
     int month;
     int year;
 };
 
-// Structure to store person's name and date of birth
+
 struct DOB {
     string name;
-    Date dob; // Nested structure
+    Date dob;    // Nested structure
 };
 
 int main() {

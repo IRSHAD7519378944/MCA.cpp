@@ -1,22 +1,22 @@
 //(a) Create Tables with Primary & Foreign Keys
 -- 1. BRANCH Table
 CREATE TABLE BRANCH (
-    branch_name VARCHAR(50) PRIMARY KEY,
-    branch_city VARCHAR(50),
+    branch_name VARCHAR(20) PRIMARY KEY,
+    branch_city VARCHAR(20),
     assets REAL
 );
 
 -- 2. ACCOUNT Table
 CREATE TABLE ACCOUNT (
     accno INT PRIMARY KEY,
-    branch_name VARCHAR(50),
+    branch_name VARCHAR(20),
     balance REAL,
     FOREIGN KEY (branch_name) REFERENCES BRANCH(branch_name)
 );
 
 -- 3. DEPOSITOR Table
 CREATE TABLE DEPOSITOR (
-    customer_name VARCHAR(50),
+    customer_name VARCHAR(20),
     accno INT,
     PRIMARY KEY (customer_name, accno),
     FOREIGN KEY (customer_name) REFERENCES CUSTOMER(customer_name),
@@ -25,22 +25,22 @@ CREATE TABLE DEPOSITOR (
 
 -- 4. CUSTOMER Table
 CREATE TABLE CUSTOMER (
-    customer_name VARCHAR(50) PRIMARY KEY,
-    customer_street VARCHAR(100),
-    customer_city VARCHAR(50)
+    customer_name VARCHAR(20) PRIMARY KEY,
+    customer_street VARCHAR(20),
+    customer_city VARCHAR(20)
 );
 
 -- 5. LOAN Table
 CREATE TABLE LOAN (
     loan_number INT PRIMARY KEY,
-    branch_name VARCHAR(50),
+    branch_name VARCHAR(20),
     amount REAL,
     FOREIGN KEY (branch_name) REFERENCES BRANCH(branch_name)
 );
 
 -- 6. BORROWER Table
 CREATE TABLE BORROWER (
-    customer_name VARCHAR(50),
+    customer_name VARCHAR(20),
     loan_number INT,
     PRIMARY KEY (customer_name, loan_number),
     FOREIGN KEY (customer_name) REFERENCES CUSTOMER(customer_name),

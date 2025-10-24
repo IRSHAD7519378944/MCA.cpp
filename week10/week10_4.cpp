@@ -1,9 +1,11 @@
+/*4#  Create a union containing 6 strings: name, home_address, hostel_address, 
+city, state and zip. Write a C++ program to display your present address.*/
+
 #include <iostream>
 #include <string>
 using namespace std;
 
-// Union to store address details
-union Address {
+struct Address {
     string name;
     string home_address;
     string hostel_address;
@@ -13,15 +15,16 @@ union Address {
 };
 
 int main() {
-    Address myAddress;
+    Address addr;
 
-    // Note: Since union can hold only one member at a time,
-    // we can store only one string meaningfully at a time.
-    cout << "Enter your present address (hostel address): ";
-    getline(cin, myAddress.hostel_address);
+    cout << "Enter your present (hostel) address: ";
+    getline(cin, addr.hostel_address);
 
-    cout << "\nYour present address is: " << myAddress.hostel_address << endl;
+    cout << "\n--- Present Address ---\n";
+    cout << "Hostel Address: " << addr.hostel_address << endl;
 
     return 0;
 }
+
+
 
