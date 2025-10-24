@@ -12,9 +12,9 @@ public:
         next = NULL;
     }
 };
+
 // LinkedList class with head and tail
 class LinkedList {
-	
 private:
     Node* head;
     Node* tail;
@@ -26,18 +26,17 @@ public:
     }
 
     // Insert node at beginning
-    void insertAtBeginning(int val){
-    	Node* newNode = new Node(val);
-    	if(head==NULL){
-    		head = tail = newNode;
-    		return;
-		}
-		newNode->next = head;
-		head = newNode;
-	}
-	
+    void insertAtBeginning(int value) {
+        Node* newNode = new Node(value);
+        if (head == NULL) {
+            head = tail = newNode;
+        } else {
+            newNode->next = head;
+            head = newNode;
+        }
+    }
+
     // Insert node at end (O(1))
-    
     void insertAtEnd(int value) {
         Node* newNode = new Node(value);
         if (head == NULL) {
@@ -47,7 +46,7 @@ public:
         tail->next = newNode;
         tail = newNode;
     }
-    
+
     // Insert a new node after a given node value
     void insertAfter(int key, int value) {
         if (head == NULL) {
@@ -75,7 +74,7 @@ public:
             tail = newNode;
         }
     }
-	
+
     // Delete first node
     void deleteFirst() {
         if (head == NULL) {
@@ -149,20 +148,6 @@ public:
         delete current;
     }
 
-	void reverseLinkedlist(){
-		Node* prev = NULL;
-		Node* curr = tail = head;
-		Node* next;
-		
-		while(curr != NULL){
-			next = curr->next;
-			curr->next = prev;
-			prev = curr;
-			curr = next;
-		}
-		head = prev;
-	}
-
     // Display the linked list
     void display() {
         if (head == NULL) {
@@ -200,7 +185,7 @@ public:
     }
 };
 
-// Menu function 
+// Menu function
 int menu() {
     int choice;
     cout << "\n\n====== LINKED LIST MENU ======\n";
@@ -210,7 +195,6 @@ int menu() {
     cout << "4. Delete First Node\n";
     cout << "5. Delete Last Node\n";
     cout << "6. Delete a Particular Node\n";
-    cout << "7. Reverse Linked List\n";
     cout << "0. Exit\n";
     cout << "Enter your choice: ";
     cin >> choice;
@@ -256,9 +240,6 @@ int main() {
             cin >> value;
             list.deleteNode(value);
             break;
-        case 7:
-        	list.reverseLinkedlist();
-        	break;
         case 0:
             exit(0);
         default:

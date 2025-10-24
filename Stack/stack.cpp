@@ -1,39 +1,53 @@
 #include <iostream>
-#include <stdlib.h>
+#include <conio.h>
+#include <conio.h>
 using namespace std;
 
-class Node {
-public:
-    int data;
-    Node* next;
-    Node(int val) { data = val; next = NULL; }
+// Node class
+class Node{
+	public:
+		int data;
+		Node* next;
+		
+		Node(int val){
+			data = val;
+		}
 };
 
+// Stack class
 class Stack {
 private:
     Node* top;
+
 public:
-    Stack() { top = NULL; }
-
-    void push(int val) {
-        Node* newNode = new Node(val);
-        newNode->next = top;
-        top = newNode;
+    Stack() {
+        top = NULL;
     }
+    
+	void push(int val){
+		Node* newNode = new Node(val);
+		newNode->next = top;
+		top = newNode;
+	}
 
-    void pop() {
-        if (top == NULL) {
-            cout << "Stack Underflow!\n";
-            return;
-        }
-        Node* temp = top;
-        top = top->next;
-        delete temp;
-    }
+	void pop(){
+		if(top == NULL){
+			cout << "underflow!";
+			getch();
+			return;
+		}
+		Node* temp = top;
+		top = top->next;
+		delete temp;
+	}
+    
 
     void peek() {
-        if (top == NULL) cout << "Stack is empty.\n";
-        else cout << "Top element: " << top->data << endl;
+        if (top == NULL) {
+            cout << "Stack is empty.\n";
+            return;
+        }
+        cout << "Top element: " << top->data << endl;
     }
 
     void display() {
@@ -41,20 +55,28 @@ public:
             cout << "Stack is empty.\n";
             return;
         }
-        cout << "\nStack elements:\n";
+        cout << "\nStack Elements:\n\n";
         Node* temp = top;
         while (temp != NULL) {
-            cout << temp->data << " -> ";
+            cout << temp->data << endl;
             temp = temp->next;
         }
-        cout << "NULL\n";
+    }
+
+    bool isEmpty() {
+        return top == NULL;
     }
 };
 
+// Menu function
 int menu() {
     int ch;
     cout << "\n\n====== STACK MENU ======\n";
-    cout << "1. Push\n2. Pop\n3. Peek\n4. Display\n0. Exit\nEnter choice: ";
+    cout << "1. Push " <<endl;
+	cout << "\n2. Pop " <<endl;
+	cout << "\n3. Peek " <<endl;
+	cout << "\n0. Exit " <<endl;
+	cout << "\n\nEnter your choice: ";
     cin >> ch;
     return ch;
 }
@@ -67,7 +89,7 @@ int main() {
         s.display();
         switch (menu()) {
         case 1:
-            cout << "Enter value: ";
+            cout << "Enter value to push: ";
             cin >> val;
             s.push(val);
             break;
@@ -77,15 +99,14 @@ int main() {
         case 3:
             s.peek();
             break;
-        case 4:
-            s.display();
-            break;
+        
         case 0:
             exit(0);
         default:
             cout << "Invalid choice!\n";
         }
-        system("pause");
     }
+    return 0;
 }
+
 

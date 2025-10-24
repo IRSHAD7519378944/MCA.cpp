@@ -32,6 +32,7 @@ public:
     		head = tail = newNode;
     		return;
 		}
+		Node* temp = head;
 		newNode->next = head;
 		head = newNode;
 	}
@@ -75,9 +76,21 @@ public:
             tail = newNode;
         }
     }
+
+
+	void deleteFirst(){
+		if(head==NULL){
+			cout << "empty  list";
+			return;
+		}
+		if(head->next=tail){
+			delete head;
+			head=tail=NULL;
+		}
+	}
 	
     // Delete first node
-    void deleteFirst() {
+   /* void deleteFirst() {
         if (head == NULL) {
             cout << "List is empty.\n";
             return;
@@ -91,7 +104,7 @@ public:
             tail = NULL;
         }
     }
-
+*/
     // Delete last node
     void deleteLast() {
         if (head == NULL) {
@@ -149,20 +162,6 @@ public:
         delete current;
     }
 
-	void reverseLinkedlist(){
-		Node* prev = NULL;
-		Node* curr = tail = head;
-		Node* next;
-		
-		while(curr != NULL){
-			next = curr->next;
-			curr->next = prev;
-			prev = curr;
-			curr = next;
-		}
-		head = prev;
-	}
-
     // Display the linked list
     void display() {
         if (head == NULL) {
@@ -200,7 +199,7 @@ public:
     }
 };
 
-// Menu function 
+// Menu function
 int menu() {
     int choice;
     cout << "\n\n====== LINKED LIST MENU ======\n";
@@ -210,7 +209,6 @@ int menu() {
     cout << "4. Delete First Node\n";
     cout << "5. Delete Last Node\n";
     cout << "6. Delete a Particular Node\n";
-    cout << "7. Reverse Linked List\n";
     cout << "0. Exit\n";
     cout << "Enter your choice: ";
     cin >> choice;
@@ -256,9 +254,6 @@ int main() {
             cin >> value;
             list.deleteNode(value);
             break;
-        case 7:
-        	list.reverseLinkedlist();
-        	break;
         case 0:
             exit(0);
         default:

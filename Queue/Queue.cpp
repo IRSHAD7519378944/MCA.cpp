@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 #include <stdlib.h>
 using namespace std;
 
@@ -9,40 +10,49 @@ public:
     Node(int val) { data = val; next = NULL; }
 };
 
-class Stack {
+class Queue {
 private:
-    Node* top;
+    Node* front;
+    Node* rear;
 public:
-    Stack() { top = NULL; }
+    Queue() { 
+	front = rear = NULL; 
+	}
 
-    void push(int val) {
+    void enqueue(int val) {
         Node* newNode = new Node(val);
-        newNode->next = top;
-        top = newNode;
-    }
-
-    void pop() {
-        if (top == NULL) {
-            cout << "Stack Underflow!\n";
+        if (rear == NULL) {
+            front = rear = newNode;
             return;
         }
-        Node* temp = top;
-        top = top->next;
-        delete temp;
+        rear->next = newNode;
+        rear = newNode;
+        cout << val << " enqueued.\n";
     }
 
-    void peek() {
-        if (top == NULL) cout << "Stack is empty.\n";
-        else cout << "Top element: " << top->data << endl;
-    }
+	void dequeue(){
+		if(front == NULL){
+			cout << "Underflow";
+			getch();
+			return;
+		}
+		
+		Node* temp = front;
+		front = front->next;
+		delete temp;
+		
+		if(front == NULL){
+			rear==NULL;
+		}
+	}
 
     void display() {
-        if (top == NULL) {
-            cout << "Stack is empty.\n";
+        if (front == NULL) {
+            cout << "Queue is empty.\n";
             return;
         }
-        cout << "\nStack elements:\n";
-        Node* temp = top;
+        cout << "\nQueue elements:\n";
+        Node* temp = front;
         while (temp != NULL) {
             cout << temp->data << " -> ";
             temp = temp->next;
@@ -53,39 +63,36 @@ public:
 
 int menu() {
     int ch;
-    cout << "\n\n====== STACK MENU ======\n";
-    cout << "1. Push\n2. Pop\n3. Peek\n4. Display\n0. Exit\nEnter choice: ";
+    cout << "\n\n====== QUEUE MENU ======\n";
+    cout << "1. Enqueue\n2. Dequeue\n3. Display\n0. Exit\nEnter choice: ";
     cin >> ch;
     return ch;
 }
 
 int main() {
-    Stack s;
+    Queue q;
     int val;
     while (1) {
         system("cls");
-        s.display();
+        q.display();
         switch (menu()) {
         case 1:
             cout << "Enter value: ";
             cin >> val;
-            s.push(val);
+            q.enqueue(val);
             break;
         case 2:
-            s.pop();
+            q.dequeue();
             break;
         case 3:
-            s.peek();
-            break;
-        case 4:
-            s.display();
+            q.display();
             break;
         case 0:
             exit(0);
         default:
             cout << "Invalid choice!\n";
         }
-        system("pause");
+       // system("pause");
     }
 }
 

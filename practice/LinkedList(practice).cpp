@@ -1,16 +1,17 @@
 #include <iostream>
 #include <conio.h>
+#include <conio.h>
 using namespace std;
 
 // Node class
-class Node {
-public:
-    int data;
-    Node* next;
-    Node(int val) {
-        data = val;
-        next = NULL;
-    }
+class Node{
+	public:
+		int data;
+		Node* next;
+		
+		Node(int val){
+			data = val;
+		}
 };
 
 // Stack class
@@ -23,22 +24,23 @@ public:
         top = NULL;
     }
     
+	void push(int val){
+		Node* newNode = new Node(val);
+		newNode->next = top;
+		top = newNode;
+	}
 
-    void push(int val) {
-        Node* newNode = new Node(val);
-        newNode->next = top;
-        top = newNode;
-    }
-
-    void pop() {
-        if (top == NULL) {
-            cout << "Stack Underflow!\n";
-            return;
-        }
-        Node* temp = top;
-        top = top->next;
-        delete temp;
-    }
+	void pop(){
+		if(top == NULL){
+			cout << "underflow!";
+			getch();
+			return;
+		}
+		Node* temp = top;
+		top = top->next;
+		delete temp;
+	}
+    
 
     void peek() {
         if (top == NULL) {
