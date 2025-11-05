@@ -1,0 +1,123 @@
+/*   
+CRUD  operation by Irshad */
+ /*####### 1. Create Table ##########*/
+ CREATE TABLE MCA(
+ roll INT PRIMARY KEY,
+ name VARCHAR(20),
+ address VARCHAR(20)
+ );
+ INSERT INTO MCA(roll,name,address) VALUES
+ (58,'Irshad','Patna'),
+ (55,'Noor Aalm','Delhi'),
+ (52,'Taukir','Aligarh'),
+ (18,'Firdaus','Delhi'),
+ (01,'Azim','Aurangabad');
+ /*###### 2. Read Table ########### */
+ SELECT * FROM MCA;
+ /*   
+WHERE clause  */
+ SELECT * FROM MCA 
+WHERE roll > 50;
+ SELECT * FROM MCA 
+WHERE address = 'Delhi';
+ SELECT * FROM MCA 
+WHERE address = 'Delhi' AND roll < 20;
+ SELECT * FROM MCA 
+WHERE roll BETWEEN 55 AND 58;
+ SELECT * FROM MCA 
+WHERE address IN ('Delhi','Patna');
+ SELECT * FROM MCA 
+WHERE address NOT IN ('Delhi','Aligarh');
+SELECT  name,roll 
+FROM MCA ORDER BY name ASC;
+ SELECT name,address 
+FROM MCA ORDER BY roll DESC;
+ SELECT MAX(roll) FROM MCA;
+ SELECT AVG(roll) FROM MCA;
+ /*  Group By clause   */
+ /*  Having clause   */
+ /*General Order
+ SELECT  column(s)
+ FROM table_name
+ WHERE condition
+ GROUP BY column(s)
+ HAVING condit ion
+ ORDER BY column(s) ASC  */
+ /*######## 3. Update Table   ######*/
+ UPDATE MCA 
+SET roll=20 WHERE ROLL=58;
+ SELECT * FROM MCA;
+ UPDATE MCA 
+SET address='Darbhanga',name='Altaf Khan' WHERE 
+roll=14;
+ UPDATE MCA 
+SET address='Sitamarhi',name='Irshad Ahmad',
+ roll=58 
+WHERE roll=20;
+ SELECT * FROM MCA;
+ /*####### 4. Delete Data  ########*/
+ DELETE FROM MCA 
+WHERE roll < 15;
+UPDATE MCA 
+SET age = 20;
+ SELECT * FROM MCA;
+ /*  Alter (to change the schema) */
+ /*  ADD Colum   */
+ ALTER TABLE MCA 
+ADD age INT;
+ SELECT * FROM MCA;
+ /*  DROP Column   */
+ ALTER TABLE MCA 
+DROP COLUMN age;
+ SELECT * FROM MCA;
+ /*   
+RENAME Table    
+ALTER TABLE MCA 
+RENAME TO MBA;
+ SELECT * FROM MBA;
+ ALTER TABLE MBA 
+RENAME TO MCA;
+ SELECT * FROM MCA;
+ /*    
+*/
+ CHANGE Column (rename    
+ALTER TABLE MCA
+ RENAME COLUMN address TO city;
+ SELECT * FROM MCA;
+ /*   
+*/
+ MODIFY Column (modify datatype/ constraint   */
+ ALTER TABLE MCA
+MODIFY (name NOT NULL );
+ /*  SIZE MODIFY  */
+ ALTER TABLE MCA
+ MODIFY city VARCHAR2(50);
+ /*    
+/*   
+Truncate (to delete table's data   */
+ Joins in SQ    
+*/
+ SELECT * FROM MCA;
+ CREATE TABLE College (
+ college_id INT PRIMARY KEY,
+ college_name VARCHAR(100),
+ city VARCHAR(50),
+ established_year INT,
+ num_students INT
+ );
+ INSERT INTO College (college_id, college_name, 
+city, established_year, num_students)
+ VALUES
+ (1, 'National Institute of Tech', 'Delhi', 1995,
+ 5000),
+ (2, 'Global University', 'Mumbai', 2000, 7000),
+ (3, 'Tech College', 'Bangalore', 1988, 4500),
+ (4, 'City Arts College', 'Delhi', 1975, 3000),
+ (5, 'Modern Engineering College', 'Pune', 2005, 
+6000);
+SELECT * FROM College;
+ SELECT city, COUNT(*) AS total_colleges, 
+AVG(num_students) AS avg_students
+ FROM College
+ GROUP BY city
+ HAVING COUNT(*) > 1;
