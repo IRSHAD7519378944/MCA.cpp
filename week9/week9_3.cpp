@@ -1,3 +1,7 @@
+// week - 9 @mdirshad-25CAMSA158
+/* 3# Write a C++ program to print the transpose of a 
+given matrix using a function. */
+
 #include <iostream>
 using namespace std;
 
@@ -32,3 +36,18 @@ int main() {
     return 0;
 }
 
+/* output 
+
+Enter rows and columns: 3 4
+Enter 3 x 4 Matrices
+1 2 3 4
+5 6 7 8
+9 0 0 9
+
+Transpose:
+1 5 9
+2 6 0
+3 7 0
+4 8 9
+
+*/

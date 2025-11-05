@@ -2,19 +2,21 @@
 #include <cstdlib>
 using namespace std;
 
-class Node {
-public:
-    int data;
-    Node* next;
-
-    Node(int val) {
-        data = val;
-        next = NULL;
-    }
-};
-
 class CircularLinkedList {
 private:
+
+    // ? Node hidden inside class
+    class Node {
+    public:
+        int data;
+        Node* next;
+
+        Node(int val) {
+            data = val;
+            next = NULL;
+        }
+    };
+
     Node* head;
     Node* tail;
 
@@ -80,6 +82,7 @@ public:
         Node* temp = head;
         while (temp->next != tail)
             temp = temp->next;
+
         temp->next = head;
         delete tail;
         tail = temp;
@@ -92,14 +95,12 @@ public:
             return;
         }
 
-        // If only one node
         if (head == tail && head->data == val) {
             delete head;
             head = tail = NULL;
             return;
         }
 
-        // If head node contains the value
         if (head->data == val) {
             deleteFirst();
             return;
@@ -114,7 +115,7 @@ public:
                 if (curr == tail)
                     tail = prev;
                 delete curr;
-                cout << "Node with value " << val << " deleted.\n";
+                cout << "Node deleted.\n";
                 return;
             }
             prev = curr;
@@ -135,11 +136,11 @@ public:
             cout << temp->data << " -> ";
             temp = temp->next;
         } while (temp != head);
-        cout << "(back to head)\n";
+        cout << "(head)\n";
     }
 };
 
-// MENU function
+// MENU
 int menu() {
     int ch;
     cout << "\n\n====== CIRCULAR LINKED LIST MENU ======\n";
@@ -150,17 +151,18 @@ int menu() {
     cout << "5. Delete by Value\n";
     cout << "6. Display\n";
     cout << "0. Exit\n";
-    cout << "\nEnter your choice: ";
+    cout << "Enter your choice: ";
     cin >> ch;
     return ch;
 }
 
-// MAIN function
+// MAIN
 int main() {
     CircularLinkedList cll;
     int val;
+
     while (1) {
-        system("cls");  // Clear screen (for Windows)
+        system("cls");
         cll.display();
         switch (menu()) {
         case 1:
@@ -194,7 +196,5 @@ int main() {
             cout << "Invalid choice!\n";
         }
     }
-    return 0;
 }
-
 

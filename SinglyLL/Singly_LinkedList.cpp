@@ -1,21 +1,21 @@
 #include <iostream>
 using namespace std;
 
-// Node class
-class Node {
-public:
-    int data;
-    Node* next;
-
-    Node(int val) {
-        data = val;
-        next = NULL;
-    }
-};
-
-// LinkedList class with head and tail
 class LinkedList {
 private:
+
+    // ? Private Node class (hidden from outside)
+    class Node {
+    public:
+        int data;
+        Node* next;
+
+        Node(int val) {
+            data = val;
+            next = NULL;
+        }
+    };
+
     Node* head;
     Node* tail;
 
@@ -25,7 +25,6 @@ public:
         tail = NULL;
     }
 
-    // Insert node at beginning
     void insertAtBeginning(int value) {
         Node* newNode = new Node(value);
         if (head == NULL) {
@@ -36,7 +35,6 @@ public:
         }
     }
 
-    // Insert node at end (O(1))
     void insertAtEnd(int value) {
         Node* newNode = new Node(value);
         if (head == NULL) {
@@ -47,7 +45,6 @@ public:
         tail = newNode;
     }
 
-    // Insert a new node after a given node value
     void insertAfter(int key, int value) {
         if (head == NULL) {
             cout << "List is empty.\n";
@@ -55,7 +52,6 @@ public:
         }
 
         Node* temp = head;
-
         while (temp != NULL && temp->data != key) {
             temp = temp->next;
         }
@@ -69,36 +65,30 @@ public:
         newNode->next = temp->next;
         temp->next = newNode;
 
-        // If inserted at the end, update tail
-        if (temp == tail) {
+        if (temp == tail)
             tail = newNode;
-        }
     }
 
-    // Delete first node
     void deleteFirst() {
         if (head == NULL) {
             cout << "List is empty.\n";
             return;
         }
-
         Node* temp = head;
         head = head->next;
         delete temp;
 
-        if (head == NULL) { // if list becomes empty
+        if (head == NULL)
             tail = NULL;
-        }
     }
 
-    // Delete last node
     void deleteLast() {
         if (head == NULL) {
             cout << "List is empty.\n";
             return;
         }
 
-        if (head->next == NULL) { // only one node
+        if (head->next == NULL) {
             delete head;
             head = tail = NULL;
             return;
@@ -112,10 +102,8 @@ public:
         delete tail;
         tail = current;
         tail->next = NULL;
-        cout << "Last node deleted.\n";
     }
 
-    // Delete node by value
     void deleteNode(int value) {
         if (head == NULL) {
             cout << "List is empty.\n";
@@ -141,19 +129,18 @@ public:
         }
 
         prev->next = current->next;
-        // Update tail if last node deleted
         if (current == tail)
             tail = prev;
 
         delete current;
     }
 
-    // Display the linked list
     void display() {
         if (head == NULL) {
             cout << "List is empty.\n";
             return;
         }
+
         Node* temp = head;
         cout << "\nLinked List:\n\n";
         while (temp != NULL) {
@@ -163,7 +150,6 @@ public:
         cout << "NULL\n";
     }
 
-    // Count nodes
     void countNodes() {
         int count = 0;
         Node* temp = head;
@@ -174,7 +160,6 @@ public:
         cout << "Total nodes: " << count << endl;
     }
 
-    // Destructor
     ~LinkedList() {
         Node* current = head;
         while (current != NULL) {
@@ -185,7 +170,6 @@ public:
     }
 };
 
-// Menu function
 int menu() {
     int choice;
     cout << "\n\n====== LINKED LIST MENU ======\n";
@@ -201,7 +185,6 @@ int menu() {
     return choice;
 }
 
-// Main function
 int main() {
     LinkedList list;
     int value;
@@ -248,3 +231,4 @@ int main() {
     }
     return 0;
 }
+

@@ -1,5 +1,5 @@
-/*  Write a C++ program to determine whether the given string is a palindrome. */
-
+// week - 8 @mdirshad-25CAMSA158
+/* 2# Write a C++ program to determine whether the given string is a palindrome. */
 #include <iostream>
 #include <string>
 using namespace std;
@@ -21,12 +21,11 @@ int main() {
         start++;
         end--;
     }
-
     if (isPalindrome)
         cout << str << " -> is a palindrome string." << endl;
     else
         cout << str << " -> is not a palindrome string." << endl;
-
     return 0;
-}
-
+}/* output
+Enter a string: level
+level -> is a palindrome string.  */

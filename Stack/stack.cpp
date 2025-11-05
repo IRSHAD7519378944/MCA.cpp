@@ -1,46 +1,43 @@
 #include <iostream>
 #include <conio.h>
-#include <conio.h>
 using namespace std;
 
-// Node class
-class Node{
-	public:
-		int data;
-		Node* next;
-		
-		Node(int val){
-			data = val;
-		}
-};
-
-// Stack class
 class Stack {
 private:
-    Node* top;
+    // ? Private Node class (Data hiding + Encapsulation)
+    class Node {
+    public:
+        int data;
+        Node* next;
+        Node(int val) {
+            data = val;
+            next = NULL;
+        }
+    };
+
+    Node* top; // stack top pointer
 
 public:
     Stack() {
         top = NULL;
     }
-    
-	void push(int val){
-		Node* newNode = new Node(val);
-		newNode->next = top;
-		top = newNode;
-	}
 
-	void pop(){
-		if(top == NULL){
-			cout << "underflow!";
-			getch();
-			return;
-		}
-		Node* temp = top;
-		top = top->next;
-		delete temp;
-	}
-    
+    void push(int val) {
+        Node* newNode = new Node(val);
+        newNode->next = top;
+        top = newNode;
+    }
+
+    void pop() {
+        if (top == NULL) {
+            cout << "Underflow!";
+            getch();
+            return;
+        }
+        Node* temp = top;
+        top = top->next;
+        delete temp;
+    }
 
     void peek() {
         if (top == NULL) {
@@ -66,17 +63,23 @@ public:
     bool isEmpty() {
         return top == NULL;
     }
+
+    ~Stack() {
+        Node* current = top;
+        while (current != NULL) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+    }
 };
 
 // Menu function
 int menu() {
     int ch;
     cout << "\n\n====== STACK MENU ======\n";
-    cout << "1. Push " <<endl;
-	cout << "\n2. Pop " <<endl;
-	cout << "\n3. Peek " <<endl;
-	cout << "\n0. Exit " <<endl;
-	cout << "\n\nEnter your choice: ";
+    cout << "1. Push \n2. Pop \n3. Peek \n0. Exit \n";
+    cout << "Enter your choice: ";
     cin >> ch;
     return ch;
 }
@@ -99,7 +102,6 @@ int main() {
         case 3:
             s.peek();
             break;
-        
         case 0:
             exit(0);
         default:
@@ -108,5 +110,3 @@ int main() {
     }
     return 0;
 }
-
-

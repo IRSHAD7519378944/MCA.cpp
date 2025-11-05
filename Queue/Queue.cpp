@@ -3,21 +3,24 @@
 #include <stdlib.h>
 using namespace std;
 
-class Node {
-public:
-    int data;
-    Node* next;
-    Node(int val) { data = val; next = NULL; }
-};
-
 class Queue {
 private:
+
+    // ? Private nested Node class (Data Hiding + Encapsulation)
+    class Node {
+    public:
+        int data;
+        Node* next;
+        Node(int val) { data = val; next = NULL; }
+    };
+
     Node* front;
     Node* rear;
+
 public:
-    Queue() { 
-	front = rear = NULL; 
-	}
+    Queue() {
+        front = rear = NULL;
+    }
 
     void enqueue(int val) {
         Node* newNode = new Node(val);
@@ -30,21 +33,21 @@ public:
         cout << val << " enqueued.\n";
     }
 
-	void dequeue(){
-		if(front == NULL){
-			cout << "Underflow";
-			getch();
-			return;
-		}
-		
-		Node* temp = front;
-		front = front->next;
-		delete temp;
-		
-		if(front == NULL){
-			rear==NULL;
-		}
-	}
+    void dequeue() {
+        if (front == NULL) {
+            cout << "Underflow";
+            getch();
+            return;
+        }
+
+        Node* temp = front;
+        front = front->next;
+        delete temp;
+
+        if (front == NULL) {
+            rear = NULL;  // ? correct
+        }
+    }
 
     void display() {
         if (front == NULL) {
@@ -92,7 +95,5 @@ int main() {
         default:
             cout << "Invalid choice!\n";
         }
-       // system("pause");
     }
 }
-

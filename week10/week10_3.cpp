@@ -1,6 +1,6 @@
+// week - 10 @mdirshad-25CAMSA158
 /*3# Create a Book structure containing book_id, title, author name and price. Write 
-a C++ program to pass a structure as a function argument and print the book 
-details. */
+a C++ program to pass a structure as a function argument and print the book details. */
 
 #include <iostream>
 #include <string>
@@ -13,7 +13,7 @@ struct Book {
     double price;
 };
 
-// Function to print book details (structure passed as argument)
+// Function to print book details
 void printBookDetails(const Book &b) {
     cout << "\nBook ID: " << b.book_id;
     cout << "\nTitle: " << b.title;
@@ -40,4 +40,14 @@ int main() {
 
     return 0;
 }
+/*  output
+Enter book ID: 1234
+Enter book title: Java
+Enter author name: irshad
+Enter book price: 786
 
+Book ID: 1234
+Title: Java
+Author: irshad
+Price: $786
+*/
