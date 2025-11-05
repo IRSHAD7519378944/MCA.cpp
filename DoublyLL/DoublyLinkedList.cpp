@@ -1,0 +1,115 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+class DoublyLinkedList {
+private:
+    class Node {
+    public:
+        int data;
+        Node* prev;
+        Node* next;
+        Node(int val) {
+            data = val; prev = next = NULL;
+        }
+    };
+
+    Node* head;
+    Node* tail;
+
+public:
+    DoublyLinkedList() { head = tail = NULL; }
+
+    void insertAtBeginning(int val) {
+        Node* newNode = new Node(val);
+        if (!head) head = tail = newNode;
+        else {
+            newNode->next = head;
+            head->prev = newNode;
+            head = newNode;
+        }
+        cout << val << " inserted at beginning.\n";
+    }
+
+    void insertAtEnd(int val) {
+        Node* newNode = new Node(val);
+        if (!head) head = tail = newNode;
+        else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+        cout << val << " inserted at end.\n";
+    }
+
+    void deleteFirst() {
+        if (!head) { 
+            cout << "List empty.\n"; 
+            return; 
+        }
+        Node* temp = head;
+        head = head->next;
+        if (head) head->prev = NULL;
+        else tail = NULL;
+        delete temp;
+        cout << "First node deleted.\n";
+    }
+
+    void deleteLast() {
+        if (!tail) { 
+            cout << "List empty.\n"; 
+            return; 
+        }
+        Node* temp = tail;
+        tail = tail->prev;
+        if (tail) tail->next = NULL;
+        else head = NULL;
+        delete temp;
+        cout << "Last node deleted.\n";
+    }
+
+    void display() {
+        if (!head) { 
+            cout << "List empty.\n"; 
+            return; 
+        }
+        Node* temp = head;
+        cout << "\nDoubly Linked List:\n";
+        while (temp) {
+            cout << temp->data << " <-> ";
+            temp = temp->next;
+        }
+        cout << "NULL\n";
+    }
+};
+
+int menu() {
+    int ch;
+    cout << "\n\n====== DOUBLY LINKED LIST MENU ======\n";
+    cout << "1. Insert at Beginning\n";
+    cout << "2. Insert at End\n";
+    cout << "3. Delete First Node\n";
+    cout << "4. Delete Last Node\n";
+    cout << "0. Exit\n";
+    cout << "Enter your choice: ";
+    cin >> ch;
+    return ch;
+}
+
+int main() {
+    DoublyLinkedList dll;
+    int val;
+    while (1) {
+        system("cls");
+        dll.display();
+        switch (menu()) {
+        case 1: cout << "Enter value: "; cin >> val; dll.insertAtBeginning(val); break;
+        case 2: cout << "Enter value: "; cin >> val; dll.insertAtEnd(val); break;
+        case 3: dll.deleteFirst(); break;
+        case 4: dll.deleteLast(); break;
+        case 0: exit(0);
+        default: cout << "Invalid choice!\n";
+        }
+    }
+}
+
